@@ -4,30 +4,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TechJobsPersistent.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace TechJobsPersistent.ViewModels
+
 {
     public class AddJobViewModel
     {
         public string Name { get; set; }
         public int EmployerId { get; set; }
-        public List<SelectListItem> Employers { get; set; }
-    }
+        public List<Employer> Employers { get; set; }
+        public List<Skill> Skills { get; set; }
 
-    public AddJobViewModel(List<Employer> employers)
-    {
-        
-        foreach(var employer in employers)
+        public AddJobViewModel(List<SelectListItem> employers, List<SelectListItem> skills)
         {
-            employers.Add(
-                new SelectListItem
-                {
-                    Name = employer.Name,
-                    Location = employer.Location
-                });
+            foreach (var employer in employers)
+            {
+                employers.Add(
+                    new SelectListItem
+                    {
+                        //employer properties
+                    }); 
+            }
+
+            foreach (var skill in skills)
+            {
+                skills.Add(
+                    new SelectListItem
+                    {
+                        //skill properties
+                    });
+            }
+            Employers = employers;
+            Skills = skills;
         }
-        public AddEventViewModel() 
-        {
-        }
-    }
+        public AddJobViewModel();
+    }    
 }
