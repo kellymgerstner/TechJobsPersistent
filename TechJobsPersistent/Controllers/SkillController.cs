@@ -14,17 +14,17 @@ namespace TechJobsPersistent.Controllers
 {
     public class SkillController : Controller
     {
-        private JobDbContext context;
+        private JobDbContext DbContext;
 
         public SkillController(JobDbContext dbContext)
         {
-            context = dbContext;
+            DbContext = dbContext;
         }
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            List<Skill> skills = context.Skills.ToList();
+            List<Skill> skills = DbContext.Skills.ToList();
             return View(skills);
         }
 
@@ -39,8 +39,8 @@ namespace TechJobsPersistent.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Skills.Add(skill);
-                context.SaveChanges();
+                DbContext.Skills.Add(skill);
+                DbContext.SaveChanges();
                 return Redirect("/Skill/");
             }
 
@@ -49,8 +49,8 @@ namespace TechJobsPersistent.Controllers
 
         public IActionResult AddJob(int id)
         {
-            Job theJob = context.Jobs.Find(id);
-            List<Skill> possibleSkills = context.Skills.ToList();
+            Job theJob = DbContext.Jobs.Find(id);
+            List<Skill> possibleSkills = DbContext.Skills.ToList();
             AddJobSkillViewModel viewModel = new AddJobSkillViewModel(theJob, possibleSkills);
             return View(viewModel);
         }
@@ -64,7 +64,7 @@ namespace TechJobsPersistent.Controllers
                 int jobId = viewModel.JobId;
                 int skillId = viewModel.SkillId;
 
-                List<JobSkill> existingItems = context.JobSkills
+                List<JobSkill> existingItems = DbContext.JobSkills
                     .Where(js => js.JobId == jobId)
                     .Where(js => js.SkillId == skillId)
                     .ToList();
@@ -76,8 +76,8 @@ namespace TechJobsPersistent.Controllers
                         JobId = jobId,
                         SkillId = skillId
                     };
-                    context.JobSkills.Add(jobSkill);
-                    context.SaveChanges();
+                    DbContext.JobSkills.Add(jobSkill);
+                    DbContext.SaveChanges();
                 }
 
                 return Redirect("/Home/Detail/" + jobId);
@@ -88,7 +88,7 @@ namespace TechJobsPersistent.Controllers
 
         public IActionResult About(int id)
         {
-            List<JobSkill> jobSkills = context.JobSkills
+            List<JobSkill> jobSkills = DbContext.JobSkills
                 .Where(js => js.SkillId == id)
                 .Include(js => js.Job)
                 .Include(js => js.Skill)
