@@ -13,36 +13,32 @@ namespace TechJobsPersistent.ViewModels
     {
         public string Name { get; set; }
         public int EmployerId { get; set; }
-        public List<Employer> Employers { get; set; }
-        public List<Skill> Skills { get; set; }
+        public List<SelectListItem> Employers { get; set; }
+        public List<SelectListItem> Skills { get; set; }
 
-        public AddJobViewModel(List<SelectListItem> employers, List<SelectListItem> skills)
+        public AddJobViewModel(List<Employer> allEmployers, List<Skill> allSkills)
         {
-            List<SelectListItem> employers = new List<SelectListItem>();
-            List<SelectListItem> skills = new List<SelectListItem>();
-
-            foreach (var employer in employers)
+            foreach (var employer in allEmployers)
             {
-                employers.Add(
+                Employers.Add(
                     new SelectListItem
                     {
-                        Value = employer.Value,
-                        Text = employer.Text
+                        Value = employer.Name,
+                        Text = employer.Name + employer.Location
                     }); 
             }
 
-            foreach (var skill in skills)
+            foreach (var skill in allSkills)
             {
-                skills.Add(
+                Skills.Add(
                     new SelectListItem
                     {
-                        Value = skill.Value,
-                        Text = skill.Text
+                        Value = skill.Name,
+                        Text = skill.Name + skill.Description
                     });
             }
-            Employers = employers;
-            Skills = skills;
+          
         }
-        public AddJobViewModel(employers, skills);
+        public AddJobViewModel() { }
     }    
 }
