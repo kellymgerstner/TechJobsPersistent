@@ -6,10 +6,21 @@
         <input class="form-control" />
         <span></span>
     </div>
-
-  
-   
-
+    <div class="form-group">
+        <label>Employer</label>
+        <select name="selectedEmployer" asp-items="Model.Options"></select>
+        <p><a asp-controller="Home" asp-action="AddJob">Add New Employer</a></p>
+    </div>
+    <div class="form-group">
+        <label>Job Skills</label>
+            @foreach (var skill in Model)
+            {
+                <label>@skill.Name</label>
+                <input type="checkbox" name="selectedSkills" value="@skill.Id" />
+            }
+        <a asp-controller="Skill" asp-action="Add">Add New Skill</a>
+        </div>
+ 
     <input type="submit" value="Add Job" />
 </form>
 
