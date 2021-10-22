@@ -53,12 +53,12 @@ namespace TechJobsPersistent.Controllers
                     EmployerId = addJobViewModel.EmployerId,
                     //need to pull user input from AddJob form for Employer and JobSkills
                     Employer = context.Employers.Find(addJobViewModel.EmployerId),
-                    JobSkills = jobSkills
+                    //JobSkills = jobSkills
                 };
 
                 foreach(string skill in selectedSkills)
                 {
-                    List<Skill> newSkill = context.Skills.Find(addJobViewModel.Skills);
+                    //List<Skill> newSkill = context.Skills.Find(addJobViewModel.Skills);
                     //context.JobSkills.Add(newSkill);
                 }
                 context.Jobs.Add(newJob);
