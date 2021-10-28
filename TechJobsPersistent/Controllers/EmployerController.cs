@@ -25,7 +25,7 @@ namespace TechJobsPersistent.Controllers
         public IActionResult Index()
         {
             List<Employer> employers = DbContext.Employers
-                .Include(e => e.Name)
+                //.Include(e => e.Name)
                 .ToList();
             return View(employers);
         }
@@ -52,7 +52,7 @@ namespace TechJobsPersistent.Controllers
                 return Redirect("/Employer");
             }
 
-            return View(addEmployerViewModel);
+            return View("Add", addEmployerViewModel);
         }
 
         public IActionResult About(int id)
