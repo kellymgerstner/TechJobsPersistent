@@ -25,15 +25,15 @@ namespace TechJobsPersistent.Controllers
         public IActionResult Index()
         {
             List<Employer> employers = DbContext.Employers
-                //.Include(e => e.Name)
+                .Include(e => e.Name)
                 .ToList();
             return View(employers);
         }
 
         public IActionResult Add()
         {
-            AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel();
-            return View(addEmployerViewModel);
+            AddEmployerViewModel addEmployer = new AddEmployerViewModel();
+            return View();
         }
 
         public IActionResult ProcessAddEmployerForm(AddEmployerViewModel addEmployerViewModel)
@@ -45,13 +45,11 @@ namespace TechJobsPersistent.Controllers
                     Name = addEmployerViewModel.Name,
                     Location = addEmployerViewModel.Location
                 };
-
                 DbContext.Employers.Add(newEmployer);
                 DbContext.SaveChanges();
 
                 return Redirect("/Employer");
             }
-
             return View("Add", addEmployerViewModel);
         }
 

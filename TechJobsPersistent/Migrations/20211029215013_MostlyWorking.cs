@@ -2,7 +2,7 @@
 
 namespace TechJobsPersistent.Migrations
 {
-    public partial class Part2AlmostFinished : Migration
+    public partial class MostlyWorking : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

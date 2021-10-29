@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TechJobsPersistent.Migrations
 {
-    public partial class EmployerControllerIndexAddProcessAddEmployerForm : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
